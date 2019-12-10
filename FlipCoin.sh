@@ -4,30 +4,43 @@ echo "WELCOME TO FLIP COIN SIMULATION"
 
 read -p "enter the number of times you want to flip the coin" flip
 
-#variables
-head=0
-tail=0
+coin=1
 
-declare -A combinationDict
-
-function singletValue()
+function getValues()
 {
-	for((i=1;i<=flip;i++))
-	do
-		randomFlip=$((RANDOM%2))
-		if [ $randomFlip -eq 1 ]	
-		then
-			head=$(($head+1))
-			combinationDict[FlipCoin$i]=Head
-		else
-			tail=$(($tail+1))
-			combinationDict[FlipCoin$i]=Tail
-		fi
-	done
-
-	total=$(($head+$tail))
-	headPer=$((100*$head/$total))
-	tailPer=$((100*$tail/$total))
-	echo $headPer
+        for (( j=0; j<$flip; j++ ))
+        do
+                unset coinValue
+                for (( i=0; i<$coin; i++ ))
+                do
+                        random=$((RANDOM%2))
+                        if [ $random -eq 1 ]
+                        then
+                                coinValue="H$coinValue "
+                                head=$(($head+1))
+                        else
+                                coinValue="T$coinValue"
+                                tail=$(($tail+1))
+                        fi
+                done
+                combinationDict[$coinValue]=$(( ${combinationDict[$coinValue]} + 1 ))
+                value="${!combinationDict[@]}"
+        done
+        total=$flip
+        echo ${combinationDict[@]}
 }
-singletValue
+
+function getPercentage()
+{
+   counter=0
+    values=$(getValues $coin)
+   for i in $values
+   do
+      counter=$(($counter+1))
+      resultDict[$counter]=$((100*$i/flip))
+   done
+   echo ${resultDict[@]}
+}
+
+result=$(getPercentage)
+echo "percentage for singlet"
