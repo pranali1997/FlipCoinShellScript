@@ -38,7 +38,7 @@ function getValues()
 
 function getPercentage()
 {
-   counter=0
+	 counter=0
     values=$(getValues $coin)
    for i in $values
    do
