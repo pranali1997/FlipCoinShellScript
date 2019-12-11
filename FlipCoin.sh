@@ -3,11 +3,12 @@
 echo "WELCOME TO FLIP COIN SIMULATION"
 
 read -p "enter the number of times you want to flip the coin" flip
+read -p "enter the number of if coins you want " coin
 
 #variables
 head=0
 tail=0
-coin=3
+
 
 declare -A combinationDict
 
@@ -48,4 +49,5 @@ function getPercentage()
 }
 
 result=$(getPercentage)
-echo "percentage for triplet" $result
+echo "percentage of $coin coin " $( printf "%s\n" $result | sort -n )
+echo "winner of $coin coin " $( printf "%s\n" $result | sort -n | tail -1 )
