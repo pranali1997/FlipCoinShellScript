@@ -4,7 +4,12 @@ echo "WELCOME TO FLIP COIN SIMULATION"
 
 read -p "enter the number of times you want to flip the coin" flip
 
-coin=1
+#variables
+head=0
+tail=0
+coin=2
+
+declare -A combinationDict
 
 function getValues()
 {
@@ -43,4 +48,4 @@ function getPercentage()
 }
 
 result=$(getPercentage)
-echo "percentage for singlet"
+echo "percentage for doubletr" $result
