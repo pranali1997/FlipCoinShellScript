@@ -7,7 +7,7 @@ read -p "enter the number of times you want to flip the coin" flip
 #variables
 head=0
 tail=0
-coin=2
+coin=3
 
 declare -A combinationDict
 
@@ -48,4 +48,4 @@ function getPercentage()
 }
 
 result=$(getPercentage)
-echo "percentage for doubletr" $result
+echo "percentage for triplet" $result
