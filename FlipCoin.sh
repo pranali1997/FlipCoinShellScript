@@ -12,36 +12,36 @@ tail=0
 
 declare -A combinationDict
 
-function getValues()
+function getDictionaryValues()
 {
-	for (( j=0; j<$flip; j++ ))
-	do
-		coinValue=""
-		for (( i=0; i<$coin; i++ ))
-		do
-			random=$((RANDOM%2))
-			if [ $random -eq 1 ]
-			then
-				coinValue="H$coinValue "
-				head=$(($head+1))
-			else
-				coinValue="T$coinValue"
-				tail=$(($tail+1))
-			fi
-		done
-		combinationDict[$coinValue]=$(( ${combinationDict[$coinValue]} + 1 ))
-	done
-	total=$flip
-	echo ${combinationDict[@]}
+        for (( j=0; j<$flip; j++ ))
+        do
+                coinValue=""
+                for (( i=0; i<$coin; i++ ))
+                do
+                        random=$((RANDOM%2))
+                        if [ $random -eq 1 ]
+                        then
+                                coinValue="H$coinValue"
+                                head=$(($head+1))
+                        else
+                                coinValue="T$coinValue"
+                                tail=$(($tail+1))
+                        fi
+                done
+                combinationDict[$coinValue]=$(( ${combinationDict[$coinValue]} + 1 ))
+        done
 }
-getValues
+getDictionaryValues
 
 function main()
 {
-	for i in ${!combinationDict[@]}
-	do
-		echo $i ${combinationDict[$i]}
-	done | sort -k2 -n | tail -1
-
+        for i in ${!combinationDict[@]}
+        do
+                echo $i ${combinationDict[$i]}
+        done | sort -k2 -n | tail -1
 }
 main
+
+
+
