@@ -34,22 +34,14 @@ function getValues()
 	total=$flip
 	echo ${combinationDict[@]}
 }
-
-function getPercentage()
-{
-	counter=0
-	values=$(getValues $coin)
-	for i in $values
-	do
-		counter=$(($counter+1))
-		resultDict[$counter]=$((100*$i/flip))
-	done
-	echo ${resultDict[@]}
-}
+getValues
 
 function main()
 {
-	result=$(getPercentage)
-	echo "winner of $coin coin " $( printf "%s\n" $result  | sort -n | tail -1 )
+	for i in ${!combinationDict[@]}
+	do
+		echo $i ${combinationDict[$i]}
+	done | sort -k2 -n | tail -1
+
 }
 main
