@@ -29,7 +29,7 @@ function getDictionaryValues()
                                 tail=$(($tail+1))
                         fi
                 done
-                combinationDict[$coinValue]=$(( ${combinationDict[$coinValue]} + 1 ))
+                combinationDict[$coinValue]=$((${combinationDict[$coinValue]}+1))
         done
 }
 getDictionaryValues
@@ -38,7 +38,8 @@ function main()
 {
         for i in ${!combinationDict[@]}
         do
-                echo $i ${combinationDict[$i]}
+		result=${combinationDict[$i]}
+                echo $i $((100*$result/$flip))
         done | sort -k2 -n | tail -1
 }
 main
