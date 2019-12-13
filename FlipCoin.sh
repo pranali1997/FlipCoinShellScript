@@ -2,47 +2,39 @@
 
 echo "WELCOME TO FLIP COIN SIMULATION"
 
-read -p "enter the number of times you want to flip the coin" flip
-read -p "enter the number of if coins you want " coin
-
-#variables
-head=0
-tail=0
-
+read -p "enter the number of times you want to flip the coin" flipNumber
+read -p "enter the number of if coins you want " coinNumber
 
 declare -A combinationDict
 
 function getDictionaryValues()
 {
-        for (( j=0; j<$flip; j++ ))
+        for (( j=0; j<$flipNumber; j++ ))
         do
-                coinValue=""
-                for (( i=0; i<$coin; i++ ))
+                flipResultKey=""
+                for (( i=0; i<$coinNumber; i++ ))
                 do
-                        random=$((RANDOM%2))
-                        if [ $random -eq 1 ]
+                        if [ $((RANDOM%2)) -eq 1 ]
                         then
-                                coinValue="H$coinValue"
-                                head=$(($head+1))
+                                flipResultKey="H$flipResultKey"
                         else
-                                coinValue="T$coinValue"
-                                tail=$(($tail+1))
+                                flipResultKey="T$flipResultKey"
                         fi
                 done
-                combinationDict[$coinValue]=$((${combinationDict[$coinValue]}+1))
+                combinationDict[$flipResultKey]=$((${combinationDict[$flipResultKey]}+1))
         done
 }
-getDictionaryValues
 
-function main()
+function getHighestPercentage()
 {
+	getDictionaryValues
         for i in ${!combinationDict[@]}
         do
-		result=${combinationDict[$i]}
-                echo $i $((100*$result/$flip))
+		coinValue=${combinationDict[$i]}
+                echo $i $((100*$coinValue/$flipNumber))
         done | sort -k2 -n | tail -1
 }
-main
+getHighestPercentage
 
 
 
